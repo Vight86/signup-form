@@ -1,0 +1,15 @@
+//Convert font size units from pixels to em
+@mixin fs-em ($font-size-in-pixels) { //entry size in pixel but without units
+  font-size: (($font-size-in-pixels / $font-size-base) + em);
+}
+
+//convert font size units from pixels to rem
+@mixin fs-rem ($font-size-in-pixels) { //entry size in pixel but without units
+  font-size: (($font-size-in-pixels / $font-size-base) + rem);
+}
+
+@mixin font ($font-size-in-pixels: 16, $font-weight: 400, $line-height: 16) {
+  font-weight: $font-weight;
+  font-size: (($font-size-in-pixels / $font-size-base) + em);
+  line-height: $line-height / $font-size-in-pixels;
+}
