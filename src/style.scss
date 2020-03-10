@@ -12,6 +12,14 @@
   &_title {
     height: 4em;
   }
+
+  &_subtitle {
+    width: 7em;
+  }
+
+  &_text {
+    width: 20.43em;
+  }
 }
 
 //Common styles
@@ -20,6 +28,18 @@
 
   color: $white;
   font-family: 'PT Sans', sans-serif;
+}
+
+.subtitle {
+  @include font(22, 500, 26);
+
+  color: $primary-color;
+}
+
+.text {
+  @include font(14, 300, 16);
+
+  color: $primary-color;
 }
 
 //page styles
@@ -53,5 +73,20 @@
     background-color: $bg-secondary-color;
     transform: scale(-1);
     writing-mode: vertical-lr;
+  }
+
+  &__data-entry {
+    width: 79.4%;
+    padding: 38px 22px 32px 20px;
+    font-family: 'Work Sans', sans-serif;
+    background-color: $white;
+  }
+
+  &__subtitle {
+    margin-bottom: 5px;
+  }
+
+  &__text {
+    margin-bottom: 20px;
   }
 }
