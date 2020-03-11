@@ -1,6 +1,7 @@
 @import './src/scss/reset';
 @import './src/scss/variables';
 @import './src/scss/mixin';
+@import './src/scss/animation';
 
 //Adds ... if text is longer than block
 .truncate {
@@ -11,14 +12,20 @@
 
   &_title {
     height: 4em;
+    letter-spacing: 0.5px;
   }
 
   &_subtitle {
     width: 7em;
+    letter-spacing: -0.46px;
   }
 
   &_text {
-    width: 20.43em;
+    width: 90%;
+
+    @media screen and (min-width: $breakpoint-sm) {
+      width: 20.43em;
+    }
   }
 
   &_label {
@@ -77,6 +84,10 @@
   &:hover {
     cursor: pointer;
   }
+
+  &_error {
+    animation: shake 0.3s ease;
+  }
 }
 
 //page styles
@@ -102,9 +113,10 @@
 
   &__title {
     position: relative;
+    z-index: 5;
     width: 20.6%;
     min-width: 70px;
-    padding-top: 20px;
+    padding-top: 22px;
     padding-left: 6px;
     background-color: $tertiary-color;
     transform: scale(-1);
@@ -114,17 +126,25 @@
   &__data-entry {
     position: relative;
     width: 79.4%;
-    padding: 38px 20px 32px 20px;
+    padding: 37px 20px 32px;
     font-family: 'Work Sans', sans-serif;
     background-color: $white;
   }
 
   &__subtitle {
-    margin-bottom: 5px;
+    &_fade-in {
+      opacity: 0;
+      animation: fade-in 0.4s 0.3s forwards;
+    }
   }
 
   &__text {
     margin-bottom: 20px;
+
+    &_fade-in {
+      opacity: 0;
+      animation: fade-in 0.4s 0.7s forwards;
+    }
   }
 
   &__content {
@@ -133,7 +153,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-bottom: 100px;
+    margin-bottom: 85px;
   }
 
   &__block {
@@ -143,7 +163,15 @@
 
     &_size_xl {
       width: 100%;
-      max-width: 235px;
+
+      @media screen and (min-width: $breakpoint-md) {
+        width: 48%;
+      }
+
+      @media screen and (min-width: $breakpoint-md) {
+        width: 100%;
+        max-width: 235px;
+      }
     }
 
     &_size_sm {
@@ -151,13 +179,37 @@
     }
 
     &_size_lg {
-      width: 38%;
+      width: 35%;
       margin-right: 3%;
       margin-left: 3%;
+
+      @media screen and (min-width: $breakpoint-xs) {
+        margin-right: 5%;
+        margin-left: 5%;
+      }
+
+      @media screen and (min-width: $breakpoint-md) {
+        width: 38%;
+        margin-right: 3%;
+        margin-left: 3%;
+      }
     }
 
     &_size_md {
       width: 27%;
+    }
+
+    &_fade-in {
+      opacity: 0;
+
+      @for $i from 0 through 8 {
+        &:nth-child(#{$i}) {
+          animation-name: fade-in;
+          animation-duration: 0.5s;
+          animation-delay: 1s + $i * 0.5s;
+          animation-fill-mode: forwards;
+        }
+      }
     }
   }
 
@@ -169,6 +221,11 @@
     &_for-radio {
       margin-bottom: 5px;
     }
+
+    &[for="password"],
+    &[for='confirm-password'] {
+      margin-top: -12px;
+    }
   }
 
   &__icon-valid {
@@ -177,12 +234,13 @@
     bottom: 13px;
     width: 11px;
     height: 8px;
-    transition: stroke-dashoffset 0.5s ease-in;
+    transition: stroke-dashoffset 0.2s ease-in;
     fill: none;
     stroke: $tertiary-color;
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-dasharray: 15;
+    stroke-dashoffset: 15;
   }
 
   &__icon-list-arrow {
@@ -209,9 +267,23 @@
     background: transparent;
     border: none;
     border-bottom: 1px solid $input-border-color;
+    transition: 0.3s;
 
     &:focus {
       outline: none;
+    }
+  }
+
+  &__input {
+    &_invalid {
+      color: $error;
+      border-bottom: 2px solid $error;
+    }
+
+    &_valid {
+      ~ .form__icon-valid {
+        stroke-dashoffset: 0;
+      }
     }
   }
 
@@ -231,7 +303,7 @@
 
     &::before {
       position: absolute;
-      top: 4px;
+      top: 7px;
       left: -18px;
       display: block;
       width: 12px;
@@ -243,7 +315,7 @@
 
     &::after {
       position: absolute;
-      top: 8px;
+      top: 11px;
       left: -14px;
       display: block;
       width: 6px;
@@ -278,6 +350,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    &_fade-in {
+      opacity: 0;
+      animation: fade-in 0.4s 5.5s forwards;
+    }
   }
 
   &__icon-user-bg {
@@ -285,27 +362,61 @@
     right: 0;
     bottom: 0;
     z-index: 1;
-    width: 411px;
-    height: 411px;
-    animation: draw-user-bg 3s ease-in 1s forwards;
+    width: 200px;
+    height: 200px;
+    animation: draw-user-bg 3s ease-in 6s forwards;
     fill: $user-icon-bg-color;
     stroke: darken($color: $user-icon-bg-color, $amount: 5);
     fill-opacity: 0;
     stroke-dasharray: 3810;
     stroke-dashoffset: 3810;
+
+    @media screen and (min-width: $breakpoint-xs) {
+      width: 411px;
+      height: 411px;
+    }
+  }
+
+  &__modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 45px;
+    padding-left: 20px;
+    background: #fff;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease-in;
+
+    &_active {
+      visibility: visible;
+      opacity: 1;
+    }
   }
 }
 
-@keyframes draw-user-bg {
-  80% {
-    stroke-dashoffset: 0;
-    fill-opacity: 0;
-    stroke: darken($color: $user-icon-bg-color, $amount: 5);
+.modal {
+  &__subtitle,
+  &__text {
+    margin-left: 10%;
+
+    @media screen and (min-width: $breakpoint-sm) {
+      margin-left: 45px;
+    }
   }
 
-  100% {
-    stroke-dashoffset: 0;
-    fill-opacity: 1;
-    stroke: $user-icon-bg-color;
+  &__subtitle {
+    margin-top: auto;
+    margin-bottom: 10px;
+  }
+
+  &__text:last-of-type {
+    margin-top: auto;
   }
 }

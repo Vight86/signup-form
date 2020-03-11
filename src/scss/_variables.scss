@@ -2,9 +2,15 @@ $font-size-base: 16;
 
 //Colors
 $white: #fff;
+$error: #f22;
 $primary-color: #111;
 $secondary-color: #7c7c7c;
 $tertiary-color: #5a61ed;
 $input-border-color: #f2f2f2;
 $bg-primary-color: #f4f5fc;
 $user-icon-bg-color: #f9faff;
+
+//breakpoints
+$breakpoint-xs: 421px;
+$breakpoint-sm: 620px;
+$breakpoint-md: 768px;
