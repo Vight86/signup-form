@@ -30,7 +30,123 @@
         create your
         account.</p>
 
+      <section class="form__content">
+
+        <p class="form__block form__block_size_xl">
+          <label for="user-first-name"
+            class="form__label truncate truncate_label">First Name</label>
+          <input type="text" id="user-first-name" class="form__input">
+        </p>
+        <p class="form__block form__block_size_xl">
+          <label for="user-last-name"
+            class="form__label truncate truncate_label">Last Name</label>
+          <input type="text" id="user-last-name" class="form__input">
+        </p>
+        <p class="form__block form__block_size_xl">
+          <label for="nationality"
+            class="form__label truncate truncate_label">Nationality</label>
+          <select id="nationality" name="nationality" class="form__select">
+            <option>American</option>
+            <option>Russian</option>
+            <option>Jedi</option>
+            <option>Sith</option>
+          </select>
+          <svg class="form__icon-list-arrow">
+            <use href="icons/sprite.svg#icon-list-arrow"></use>
+          </svg>
+        </p>
+        <p class="form__block form__block_size_xl">
+          <label for="email"
+            class="form__label truncate truncate_label">E-mail</label>
+          <input type="email" id="email" class="form__input">
+          <svg class="form__icon-valid">
+            <use href="icons/sprite.svg#icon-valid"></use>
+          </svg>
+        </p>
+        <fieldset class="form__block form__block_size_xl">
+          <legend class="form__label truncate truncate_label">Date of birth
+          </legend>
+          <p class="form__block form__block_size_sm">
+            <select id="day" name="day" class="form__select form__select_day">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
+            <svg class="form__icon-list-arrow">
+              <use href="icons/sprite.svg#icon-list-arrow"></use>
+            </svg>
+          </p>
+          <p class="form__block form__block_size_lg">
+            <select id="month" name="month"
+              class="form__select form__select_month">
+              <option>January</option>
+              <option>Febuary</option>
+              <option>March</option>
+              <option>April</option>
+            </select>
+            <svg class="form__icon-list-arrow">
+              <use href="icons/sprite.svg#icon-list-arrow"></use>
+            </svg>
+          </p>
+          <p class="form__block form__block_size_md">
+            <select id="year" name="year"
+              class="form__select form__select_year">
+              <option>1990</option>
+              <option>1991</option>
+              <option>1992</option>
+              <option>1993</option>
+            </select>
+            <svg class="form__icon-list-arrow">
+              <use href="icons/sprite.svg#icon-list-arrow"></use>
+            </svg>
+          </p>
+        </fieldset>
+
+        <fieldset class="form__block form__block_size_xl">
+          <legend
+            class="form__label form__label_for-radio truncate truncate_label">
+            Gender
+          </legend>
+          <p class="form__block">
+            <input type="radio" id="male" name="gender" value="male"
+              class="form__radio">
+            <label for="male" class="form__radio-label">Male</label>
+          </p>
+          <p class="form__block">
+            <input type="radio" id="female" name="gender" value="female"
+              class="form__radio">
+            <label for="female" class="form__radio-label">Female</label>
+          </p>
+        </fieldset>
+
+        <p class="form__block form__block_size_xl">
+          <label for="password"
+            class="form__label truncate truncate_label">Password</label>
+          <input type="password" id="password" class="form__input">
+        </p>
+        <p class="form__block form__block_size_xl">
+          <label for="confirm-password"
+            class="form__label truncate truncate_label">Confirm
+            password</label>
+          <input type="password" id="confirm-password" class="form__input">
+        </p>
+
+      </section>
+
+      <section class="form__footer">
+        <p class="text text_size_smaller truncate truncate_text">Have an
+          account? <a href="#" class="link">Login</a></p>
+
+        <button class="btn">Complete Signup</button>
+
+      </section>
+      <svg class="form__icon-user-bg">
+        <use href="icons/sprite.svg#icon-user-bg"></use>
+      </svg>
+
     </section>
+
   </form>
 
 </body>
