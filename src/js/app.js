@@ -43,10 +43,10 @@ submit.addEventListener('click', (e) => {
   if (!userFirstName.validity.valid) {
     submit.classList.add('btn_error');
     userFirstName.setCustomValidity('Please, enter your first name');
-  } else if (!userLastName) {
+  } else if (!userLastName.validity.valid) {
     submit.classList.add('btn_error');
     userLastName.setCustomValidity('Please, enter your last name');
-  } else if (!email) {
+  } else if (!email.validity.valid) {
     submit.classList.add('btn_error');
     email.setCustomValidity('Please, enter your email');
   } else if (!pass) {
