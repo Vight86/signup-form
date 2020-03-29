@@ -62,23 +62,6 @@ function js(cb) {
   cb();
 }
 
-function imgBuild(cb) {
-  src([`${source}/img/**/*.svg`])
-    .pipe(newer(`${build}/img`))
-    .pipe(imagemin([
-      imagemin.svgo({
-        plugins: [
-          { removeTitle: false },
-          { removeDesc: false },
-          { removeViewBox: false },
-        ],
-      }),
-    ]))
-    .pipe(dest(`${build}/img`));
-
-  cb();
-}
-
 function svgSpriteBuild(cb) {
   src(`${source}/icons/**/*.svg`)
     .pipe(newer(`${build}/icons/`))
@@ -118,7 +101,7 @@ function watcher(cb) {
   watch(`${source}/**/*.html`).on('change', series(html, browserSync.reload));
   watch([`${source}/**/*.scss`, `${source}/**/*.css`]).on('change', series(styles, browserSync.reload));
   watch(`${source}/**/*.js`).on('change', series(js, browserSync.reload));
-  watch(`${source}/img/`).on('add', series(imgBuild, browserSync.reload));
+  watch(`${source}/img/`).on('add', series(browserSync.reload));
   watch(`${source}/icons/`).on('add', series(svgSpriteBuild, browserSync.reload));
   cb();
 }
@@ -129,10 +112,10 @@ function clean() {
 
 exports.clean = clean;
 
-exports.dev = series(clean, imgBuild, svgSpriteBuild, parallel(
+exports.dev = series(clean, svgSpriteBuild, parallel(
   html, styles, js,
 ), server, watcher);
 
-exports.build = series(clean, imgBuild, svgSpriteBuild, parallel(
+exports.build = series(clean, svgSpriteBuild, parallel(
   html, styles, js,
 ), server);
